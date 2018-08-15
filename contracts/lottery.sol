@@ -15,12 +15,12 @@ contract Lottery {
     }
     
     function random() private view returns (uint) {
-        return uint(keccak256(block.difficulty, now, players));
+        return uint(keccak256(abi.encodePacked(block.difficulty, now, players)));
     }
     
     function pickWinner() public onlyManager{
         uint index = random() % players.length;
-        players[index].transfer(this.balance);
+        players[index].transfer(address(this).balance);
         players = new address[](0); 
     }
     
