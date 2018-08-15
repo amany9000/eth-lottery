@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/amany9000/ethereum-lottery/issues"
   },
-  "homepage": "https://github.com/amany9000/ethereum-lottery#readme"
+  "homepage": "https://github.com/amany9000/ethereum-lottery#readme",
+  "dependencies": {
+    "solc": "^0.4.24"
+  }
 }
