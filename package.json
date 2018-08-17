@@ -4,7 +4,7 @@
   "description": "A Ethereum Based Lottery Application.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/amany9000/ethereum-lottery#readme",
   "dependencies": {
+    "ganache-cli": "^6.1.8",
+    "mocha": "^5.2.0",
     "solc": "^0.4.24",
     "truffle-hdwallet-provider": "0.0.6",
     "web3": "^1.0.0-beta.35"
