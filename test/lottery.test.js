@@ -65,18 +65,40 @@ describe("Lottery Contract", () => {
 	 	assert.equal(3,players.length);
 	 });
 
-	 it("should fail because of lower than threshold ether", async () => {
+	 it("lower than threshold ether call should fail", async () => {
 	 	try{
-	 		
-	 		await lottery.methods.enter().send({
+	 		returned = await lottery.methods.enter().send({
 	 			from: accounts[1],
-	 			value: web3.utils.toWei("0.009","ether")
+	 			value: web3.utils.toWei("0.000001","ether")
 	 		});
-			assert(false);			 		
+	 		assert.fail()
+	 	} catch(err){
+	 		assert.notEqual('AssertionError [ERR_ASSERTION]', err.name);
 	 	}
-	 	
-	 	catch(err){
-	 		assert(err);
+	 });
+
+	 it("non-manager calling pickWinner() should fail", async () => {
+	 	try{
+	 		await lottery.methods.pickWinner().send({
+	 			from: accounts[0],
+	 		});
+			assert.fail()
+	 	} catch(err){
+	 		//console.log(err)
+	 		assert.notEqual('AssertionError [ERR_ASSERTION]', err.name);
 	 	}
-	 })
+	 });
+
+	 it("should pick a winner", async () => {
+	 	await lottery.methods.enter().send({
+	 		from: accounts[1],
+	 		value: web3.utils.toWei("2", "ether")
+	 	});
+
+	 	const initialBalance = await web3.eth.getBalance(accounts[1]);
+	 	await lottery.methods.pickWinner().send({from: accounts[0]});
+	 	const finalBalance = await web3.eth.getBalance(accounts[1]);
+	 	//console.log(initialBalance, finalBalance, finalBalance - initialBalance);
+	 	assert( web3.utils.toWei("2","ether"), (finalBalance - initialBalance)) 
+	 });
 })
