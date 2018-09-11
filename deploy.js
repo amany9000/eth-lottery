@@ -5,7 +5,7 @@ const Web3 = require("web3");
 const { interface, bytecode } = require("./compile");
 
 const provider = new hdWalletProvider(
-	"{Your Account Mnemonic from Metamas}",
+	"{Your Account Mnemonic from Metamask}",
 	"https://mainnet.infura.io/v3/e8bccfbf91864d7ea8797b0ae8b2d30a"
 );
 
